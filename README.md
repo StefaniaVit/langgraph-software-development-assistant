@@ -1,57 +1,112 @@
 # LangGraph Software Development Assistant
 
-A multi-agent LangGraph project that analyzes code and coordinates specialized agents for documentation, testing, optimization, and quality review.
+A multi-agent LangGraph workflow that simulates a software development assistant for code analysis, test recommendation, documentation support, and optimization review [file:26]. The system demonstrates coordinator-based orchestration, shared state management, conditional routing, telemetry, and fallback-oriented quality review in a production-style workflow [file:26].
 
 ## Overview
 
-This project implements a production-oriented multi-agent workflow using LangGraph. The system is designed as a Software Development Assistant that accepts code or engineering tasks as input and routes them through a coordinated set of specialized agents.
+This project was built as a LangGraph capstone to demonstrate multi-agent coordination for a realistic business scenario: a Software Development Assistant [file:26]. The workflow uses a coordinator node plus multiple specialized agents that operate on a shared state object and route dynamically based on task needs [file:26].
 
-The goal is to demonstrate:
-- Multi-agent collaboration
-- Persistent shared state
-- Conditional routing
-- Error handling and graceful degradation
-- Production-readiness through logging, monitoring, and test coverage
+## Features
 
-## Planned Agents
+- Coordinator node for workflow planning and orchestration [file:26]
+- Specialized agents for:
+  - Code analysis [file:26]
+  - Test recommendation [file:26]
+  - Documentation drafting [file:26]
+  - Optimization review [file:26]
+  - Final quality review [file:26]
+- Shared typed workflow state using `TypedDict` [file:26]
+- Conditional routing based on request content [file:26]
+- Telemetry and execution trace fields for observability [file:26]
+- Fallback behavior triggered by error state [file:26]
+- Pytest coverage for multiple workflow paths [file:26]
 
-- Coordinator Agent: Orchestrates workflow execution and routing decisions
-- Code Analysis Agent: Reviews structure, risks, and code quality issues
-- Test Generation Agent: Suggests unit and edge-case tests
-- Documentation Agent: Produces explanations and usage documentation
-- Optimization Agent: Recommends performance and maintainability improvements
-- Quality Review Node: Checks consistency, confidence, and escalation conditions
-
-## Planned Features
-
-- Shared LangGraph state across all agents
-- Conditional edges for low-confidence and high-risk cases
-- Retry and fallback mechanisms
-- Telemetry and provenance tracking
-- Demo inputs and test cases for multiple workflow paths
-
-## Repository Structure
+## Project structure
 
 ```text
-src/
-tests/
-docs/
-data/
-notebooks/
+langgraph-software-development-assistant/
+├── README.md
+├── requirements.txt
+├── src/
+│   └── software_dev_assistant/
+│       ├── __init__.py
+│       ├── main.py
+│       ├── graph.py
+│       └── state.py
+└── tests/
+    └── test_graph.py
 ```
-
-## Status
-
-Initial repository scaffold. Implementation in progress.
 
 ## Setup
 
-Coming soon.
+Create and activate a Python virtual environment:
 
-## Demo
+```bash
+python -m venv .venv
+source .venv/bin/activate
+```
 
-Coming soon.
+Install dependencies:
 
-## Reflection
+```bash
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+```
 
-This project is part of a LangGraph capstone focused on advanced workflow orchestration and multi-agent system design.
+## Run the demo
+
+From the repository root:
+
+```bash
+export PYTHONPATH=src
+python src/software_dev_assistant/main.py
+```
+
+This runs a sample request through the full LangGraph workflow and prints the final state, including completed agents, outputs, routing decisions, and telemetry [file:26].
+
+## Run the tests
+
+```bash
+export PYTHONPATH=src
+pytest tests/test_graph.py -v
+```
+
+The tests validate the happy path, optimization path, default coordinator behavior, fallback behavior, and telemetry recording [file:26].
+
+## Workflow summary
+
+The workflow begins with a coordinator node that inspects the user request and determines which specialist agents are needed [file:26]. It then routes through code analysis and conditionally invokes test generation, documentation, and optimization before passing control to a quality review node that decides whether to respond, escalate, or fall back [file:26].
+
+## State design
+
+The workflow uses a shared `WorkflowState` schema to store:
+- user input fields,
+- coordinator decisions,
+- agent outputs,
+- completion and status tracking,
+- confidence and final action,
+- error and retry fields,
+- telemetry events for monitoring [file:26]
+
+This state-driven design makes agent collaboration explicit and supports debugging, observability, and maintainability [file:26].
+
+## Current MVP scope
+
+This version is a deterministic MVP: agent outputs are rule-based rather than generated by live LLM calls. The focus of the current implementation is workflow architecture, shared state, routing, and testability, which are core requirements of the capstone [file:26].
+
+## Possible next enhancements
+
+- Replace rule-based node outputs with LLM-powered agent logic
+- Add retry logic and circuit breaker patterns
+- Introduce explicit fallback nodes
+- Add structured logging
+- Persist runs for audit/history
+- Add notebook or API demo entry points
+
+## Deliverables status
+
+- Multi-agent workflow implementation: completed [file:26]
+- Shared state and coordination logic: completed [file:26]
+- Test coverage for multiple paths: completed [file:26]
+- Documentation: in progress [file:26]
+- Reflection report: pending [file:26]
